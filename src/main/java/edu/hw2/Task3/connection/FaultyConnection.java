@@ -2,7 +2,6 @@ package edu.hw2.Task3.connection;
 
 import edu.hw2.Task3.Connection;
 import edu.hw2.Task3.exeption.ConnectionException;
-
 import java.util.Random;
 
 public class FaultyConnection implements Connection {
