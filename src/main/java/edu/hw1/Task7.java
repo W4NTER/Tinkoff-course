@@ -4,12 +4,14 @@ public final class Task7 {
     private Task7() {
     }
 
+    private final static int RADIX = 2;
+
     public static int rotateRight(int n, int shift) {
         int length = Integer.toBinaryString(n).length();
         int shiftRes = shift % length;
         String rotateResult = Integer.toBinaryString(n >> shiftRes | n << (length - shiftRes));
         int resultLength = rotateResult.length();
-        return Integer.parseInt(rotateResult.substring(resultLength - length, resultLength), 2);
+        return Integer.parseInt(rotateResult.substring(resultLength - length, resultLength), RADIX);
     }
 
     public static int rotateLeft(int n, int shift) {
@@ -17,6 +19,6 @@ public final class Task7 {
         int shiftRes = shift % length;
         String rotateResult = Integer.toBinaryString(n << shiftRes | n >> (length - shiftRes));
         int resultLength = rotateResult.length();
-        return Integer.parseInt(rotateResult.substring(resultLength - length, resultLength), 2);
+        return Integer.parseInt(rotateResult.substring(resultLength - length, resultLength), RADIX);
     }
 }

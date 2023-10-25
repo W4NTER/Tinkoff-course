@@ -3,6 +3,8 @@ package edu.hw1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task3Test {
 
@@ -15,11 +17,10 @@ public class Task3Test {
 
         boolean isNestable = Task3.isNestable(array1, array2);
 
-        assertEquals(false, isNestable);
+        assertFalse(isNestable);
     }
 
     @Test
-    @DisplayName("Test2")
     void isThisArrFits1() {
 
         int[]array1 = new int[] {1, 2, 3, 4};
@@ -27,11 +28,10 @@ public class Task3Test {
 
         boolean isNestable = Task3.isNestable(array1, array2);
 
-        assertEquals(true, isNestable);
+        assertTrue(isNestable);
     }
 
     @Test
-    @DisplayName("Test3")
     void isThisArrFits2() {
 
         int[]array1 = new int[] {3, 1};
@@ -39,11 +39,10 @@ public class Task3Test {
 
         boolean isNestable = Task3.isNestable(array1, array2);
 
-        assertEquals(true, isNestable);
+        assertTrue(isNestable);
     }
 
     @Test
-    @DisplayName("Test4")
     void isThisArrFits3() {
 
         int[]array1 = new int[] {9, 9, 8};
@@ -51,6 +50,6 @@ public class Task3Test {
 
         boolean isNestable = Task3.isNestable(array1, array2);
 
-        assertEquals(false, isNestable);
+        assertFalse(isNestable);
     }
 }

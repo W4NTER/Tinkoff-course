@@ -21,10 +21,9 @@ public class Task7Test {
     @Test
     @DisplayName("проверка rotateLeft2")
     void rotateLeftCheck2() {
-        int n = 17;
-        int shift = 2;
-
-        int result = 6;
+        final int n = 17;
+        final int shift = 2;
+        final int result = 6;
 
         assertEquals(result, Task7.rotateLeft(n, shift));
 

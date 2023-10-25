@@ -19,7 +19,6 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Test2")
     void fixedString1() {
         String input = "hTsii  s aimex dpus rtni.g";
 
@@ -30,7 +29,6 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Test3")
     void fixedString2() {
         String input = "badce";
 
@@ -40,7 +38,6 @@ public class Task4Test {
     }
 
     @Test
-    @DisplayName("Test4")
     void fixedString13() {
         String input = "оПомигети псаривьтс ртко!и";
 

@@ -7,18 +7,16 @@ public final class Task6 {
     }
 
     private static final int FINAL_VALUE = 6174;
+    private static final int DELIMITER = 10;
+    private static final int ARRAY_LENGTH = 4;
 
     public static int countKRecursion(int num, int counter) {
         int numerator = counter;
-        int number = num;
-        StringBuilder value =  new StringBuilder(String.valueOf(num));
-        int[] arrayNums = new int[] {0, 0, 0, 0};
-
-        for (int i = 0; i < value.length(); i++) {
-             arrayNums[i] = Integer.parseInt(value.substring(i, i + 1));
-        }
-        Arrays.sort(arrayNums);
+        int[] arrayNums = new int[ARRAY_LENGTH];
         StringBuilder strValue = new StringBuilder();
+
+        numToArr(num, arrayNums);
+        Arrays.sort(arrayNums);
 
         for (int arrayNum : arrayNums) {
             strValue.append(arrayNum);
@@ -33,7 +31,7 @@ public final class Task6 {
         if (num == FINAL_VALUE) {
             return counter;
         } else {
-            number = Math.max(number1, number2) - Math.min(number1, number2);
+            int number = Math.max(number1, number2) - Math.min(number1, number2);
             numerator++;
             return countKRecursion(number, numerator);
         }
@@ -43,5 +41,13 @@ public final class Task6 {
         int counter = 0;
         counter = countKRecursion(number, counter);
         return counter;
+    }
+
+    public static void numToArr(int num, int[] arr) {
+        int number = num;
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = number % DELIMITER;
+            number /= DELIMITER;
+        }
     }
 }

@@ -6,18 +6,23 @@ public final class Task5 {
 
     public static boolean isPalindromeDescendant(int number) {
         StringBuilder variableNumber = new StringBuilder(String.valueOf(number));
-        StringBuilder createdNumber = new StringBuilder();
         if (variableNumber.toString().contentEquals(variableNumber.reverse()) && variableNumber.length() > 1) {
             return true;
         } else if (variableNumber.length() > 1) {
             variableNumber.reverse();
-            for (int i = 0; i < variableNumber.length() - 1; i += 2) {
-                createdNumber.append(Integer.parseInt(variableNumber.substring(i, i + 1))
-                        + Integer.parseInt(variableNumber.substring(i + 1, i + 2)));
-            }
+            StringBuilder createdNumber = createNewNumber(variableNumber);
           return isPalindromeDescendant(Integer.parseInt(createdNumber.toString()));
         } else {
             return false;
         }
+    }
+
+    public static StringBuilder createNewNumber(StringBuilder number) {
+        StringBuilder createdNumber = new StringBuilder();
+        for (int i = 0; i < number.length() - 1; i += 2) {
+            createdNumber.append(Integer.parseInt(number.substring(i, i + 1))
+                + Integer.parseInt(number.substring(i + 1, i + 2)));
+        }
+        return createdNumber;
     }
 }

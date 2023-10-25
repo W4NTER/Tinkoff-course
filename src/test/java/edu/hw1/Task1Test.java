@@ -3,57 +3,49 @@ package edu.hw1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Task1Test {
-
     @Test
     @DisplayName("Время видео в секундах")
     void videoLengthInSeconds() {
-        //given
-        String videoLength = "01:00";
-
+        final String VIDEO_LENGTH_TEST = "01:00";
+        final int EXPECTED_VALUE = 60;
         //when
-        int lengthInSeconds = Task1.minutesToSeconds(videoLength);
+        int lengthInSeconds = Task1.minutesToSeconds(VIDEO_LENGTH_TEST);
 
         //then
-        assertEquals(60, lengthInSeconds);
-
+        assertEquals(EXPECTED_VALUE, lengthInSeconds);
     }
 
     @Test
-    @DisplayName("Тест2")
-    void videoLengthInSeconds2() {
-
-        String videoLength = "13:56";
-
-        int lengthInSeconds = Task1.minutesToSeconds(videoLength);
-
-        assertEquals(836, lengthInSeconds);
-    }
-
-    @Test
-    @DisplayName("Тест3")
+    @DisplayName("Тест на предел секунд")
     void videoLengthInSecondsWithFullSec() {
+        final String VIDEO_LENGTH_FULL_SEC = "1:60";
+        final int EXPECTED_VALUE = -1;
 
-        String videoLength = "1:60";
+        int lengthInSeconds = Task1.minutesToSeconds(VIDEO_LENGTH_FULL_SEC);
 
-        int lengthInSeconds = Task1.minutesToSeconds(videoLength);
-
-        assertEquals(-1, lengthInSeconds);
+        assertEquals(EXPECTED_VALUE, lengthInSeconds);
     }
 
     @Test
-    @DisplayName("Тест4")
+    @DisplayName("Проверка на большое количество минут")
     void videoLengthInSecondsWithALotMin() {
+        final String VIDEO_LENGTH_A_LOT_OF_MIN = "11212:10";
+        final int EXPECTED_VALUE = 672730;
 
-        String videoLength = "11212:10";
+        int lengthInSeconds = Task1.minutesToSeconds(VIDEO_LENGTH_A_LOT_OF_MIN);
 
-        int lengthInSeconds = Task1.minutesToSeconds(videoLength);
-
-        assertEquals(672730, lengthInSeconds);
+        assertEquals(EXPECTED_VALUE, lengthInSeconds);
     }
 
+    @Test
+    @DisplayName("Неправильный ввод данных")
+    void incorrectData() {
+        final String VIDEO_LENGTH_INCORRECT = "abc:abc";
+        final int EXPECTED_VALUE = -1;
+
+        assertEquals(EXPECTED_VALUE, Task1.minutesToSeconds(VIDEO_LENGTH_INCORRECT));
+    }
 }

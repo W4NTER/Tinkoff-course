@@ -7,43 +7,47 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task2Test {
 
     @Test
-    @DisplayName("Количество чисел в числе")
+    @DisplayName("Количество цифр в числе")
     void countOfValues() {
-        int input = 544;
+        final int INPUT = 544;
+        final int EXPECTED_COUNT_DIGITS = 3;
 
-        int countsOfDigits = Task2.countDigits(input);
+        int countsOfDigits = Task2.countDigits(INPUT);
 
-        assertEquals(3, countsOfDigits);
+        assertEquals(EXPECTED_COUNT_DIGITS, countsOfDigits);
     }
 
     @Test
-    @DisplayName("Тест2")
+    @DisplayName("Проверка 2, на количество цифр в числе")
     void countOfValues2() {
-        int input = 4666;
+        final int INPUT = 4666;
+        final int EXPECTED_COUNT_DIGITS = 4;
 
-        int countDigits = Task2.countDigits(input);
+        int countDigits = Task2.countDigits(INPUT);
 
-        assertEquals(4, countDigits);
+        assertEquals(EXPECTED_COUNT_DIGITS, countDigits);
     }
 
     @Test
-    @DisplayName("Тест3")
+    @DisplayName("Проверка нуля на количество цифр")
     void countOfValuesByZero() {
-        int input = 0;
+        final int INPUT = 0;
+        final int EXPECTED_COUNT_DIGITS = 1;
 
-        int countOfDigits = Task2.countDigits(input);
+        int countOfDigits = Task2.countDigits(INPUT);
 
-        assertEquals(1, countOfDigits);
+        assertEquals(EXPECTED_COUNT_DIGITS, countOfDigits);
     }
 
     @Test
-    @DisplayName("Тест4")
+    @DisplayName("Проверка на большом числе")
     void countOfValuesALot() {
-        int input = 1212121;
+        final int INPUT = 1212121;
+        final int EXPECTED_COUNT_DIGITS = 7;
 
-        int countOfDigits = Task2.countDigits(input);
+        int countOfDigits = Task2.countDigits(INPUT);
 
-        assertEquals(7, countOfDigits);
+        assertEquals(EXPECTED_COUNT_DIGITS, countOfDigits);
     }
 
 

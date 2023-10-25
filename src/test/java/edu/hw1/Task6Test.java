@@ -5,34 +5,31 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task6Test {
+    private final static int FIRST_VALUE = 6621;
+    private final static int SECOND_VALUE = 6554;
+    private final static int THIRD_VALUE = 1234;
 
     @Test
-    @DisplayName("Test1")
+    @DisplayName("Проверка правильности результата")
     void countKTest() {
-        int value = 6621;
-
         int result = 5;
 
-         assertEquals(result, Task6.countK(value));
+         assertEquals(result, Task6.countK(FIRST_VALUE));
     }
 
     @Test
-    @DisplayName("Test2")
+    @DisplayName("Проверка на другом числе")
     void countKTest2() {
-        int value = 6554;
-
         int result = 4;
 
-        assertEquals(result, Task6.countK(value));
+        assertEquals(result, Task6.countK(SECOND_VALUE));
     }
 
     @Test
-    @DisplayName("Test3")
+    @DisplayName("Проверка на третьем числе")
     void countKTest3() {
-        int value = 1234;
-
         int result = 3;
 
-        assertEquals(result, Task6.countK(value));
+        assertEquals(result, Task6.countK(THIRD_VALUE));
     }
 }
