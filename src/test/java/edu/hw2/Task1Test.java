@@ -60,5 +60,4 @@ public class Task1Test {
 
         assertEquals(EXPECTED_VALUE, multiplication.evaluate());
     }
-
 }

@@ -8,20 +8,12 @@ public sealed interface Expr {
         public double evaluate() {
             return value;
         }
-
-        public Constant(Expr expr) {
-            this(expr.evaluate());
-        }
     }
 
     record Negate(double value) implements Expr {
         @Override
         public double evaluate() {
             return -value;
-        }
-
-        public Negate(Expr expr) {
-            this(expr.evaluate());
         }
     }
 
@@ -30,21 +22,12 @@ public sealed interface Expr {
         public double evaluate() {
             return Math.pow(value, degree);
         }
-
-        public Exponent(Expr expr, int degree) {
-            this(expr.evaluate(), degree);
-        }
     }
 
     record Addition(double firstVal, double secondVal) implements Expr {
-
         @Override
         public double evaluate() {
             return firstVal + secondVal;
-        }
-
-        public Addition(Expr value1, Expr value2) {
-            this(value1.evaluate(), value2.evaluate());
         }
     }
 
@@ -52,10 +35,6 @@ public sealed interface Expr {
         @Override
         public double evaluate() {
             return firstVal * secondVal;
-        }
-
-        public Multiplication(Expr firstV, Expr secondV) {
-            this(firstV.evaluate(), secondV.evaluate());
         }
     }
 }
