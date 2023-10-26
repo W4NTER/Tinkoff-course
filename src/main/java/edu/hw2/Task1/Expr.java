@@ -4,7 +4,6 @@ public sealed interface Expr {
     double evaluate();
 
     record Constant(double value) implements Expr {
-
         @Override
         public double evaluate() {
             return value;
@@ -47,7 +46,6 @@ public sealed interface Expr {
         public Addition(Expr value1, Expr value2) {
             this(value1.evaluate(), value2.evaluate());
         }
-
     }
 
     record Multiplication(double firstVal, double secondVal) implements Expr {
