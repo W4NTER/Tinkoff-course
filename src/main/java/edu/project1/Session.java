@@ -16,20 +16,21 @@ public class Session {
             return new Defeat(userAnswer);
         } else if (answer.indexOf(guess) == -1) {
             return new FailedGuess(attempts, maxAttempts, userAnswer);
-        } else if (!String.valueOf(userAnswer).contains("*")) {
-            return new GuessResult.Win(userAnswer);
         } else {
             int position = answer.indexOf(guess);
             while (position != -1) {
                 userAnswer[position] = guess;
                 position = answer.indexOf(guess, position + 1);
             }
+            if (!String.valueOf(userAnswer).contains("*")) {
+                return new GuessResult.Win(userAnswer);
+            }
             return new SuccessfulGuess(attempts, maxAttempts, userAnswer);
         }
     }
 
     @NotNull GuessResult giveUp(String command) {
-        if (command.equals("giveUp")) {
+        if (command.contentEquals("giveUp")) {
             return new Defeat(userAnswer);
         } else {
             return new FailedGuess(attempts, maxAttempts, userAnswer);
