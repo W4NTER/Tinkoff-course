@@ -13,7 +13,8 @@ public final class Task1 {
     public static String atbash(String input) {
         StringBuilder result = new StringBuilder();
         for (char ch : input.toCharArray()) {
-            if (ch < UPPER_CASE_A_IN_CHARS || (ch > LAST_UPPER_CASE_LETTER && ch < LOWER_CASE_A_IN_CHARS) || ch > LAST_LETTER_IN_CHARS) {
+            if (ch < UPPER_CASE_A_IN_CHARS || (ch > LAST_UPPER_CASE_LETTER && ch < LOWER_CASE_A_IN_CHARS)
+                || ch > LAST_LETTER_IN_CHARS) {
                 result.append(ch);
             } else {
                 int offset = Character.isUpperCase(ch) ? UPPER_CASE_A_IN_CHARS : LOWER_CASE_A_IN_CHARS;
