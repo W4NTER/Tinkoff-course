@@ -1,8 +1,16 @@
 package edu.project2;
 
-public class Main {
+import java.util.Scanner;
+
+public final class Main {
+    private Main() {
+    }
+
     public static void main(String[] args) {
-        Maze maze = new Maze(11, 11);
+        Scanner command = new Scanner(System.in);
+        int rows = command.nextInt();
+        int cols = command.nextInt();
+        Maze maze = new Maze(rows, cols);
         maze.printMaze();
     }
 }

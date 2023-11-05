@@ -1,14 +1,14 @@
 package edu.project2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Maze {
+    private final static Logger LOGGER = LogManager.getLogger();
     private int rows;
     private int cols;
     private int[][] maze;
@@ -84,16 +84,18 @@ public class Maze {
     public void printMaze() {
 //        Arrays.stream(maze).map(Arrays::toString).forEach(System.out::println);
 //        Logger LOGGER = LogManager.getLogger();
+        StringBuilder output = new StringBuilder("\n");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (maze[i][j] == 1) {
-                    System.out.print("█ ");
+                    output.append("█ ");
                 } else {
-                    System.out.print("  ");
+                    output.append("  ");
                 }
             }
-            System.out.println("\n");
+            output.append("\n");
         }
+        LOGGER.info(output);
     }
 
 
