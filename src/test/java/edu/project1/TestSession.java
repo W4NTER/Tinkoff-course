@@ -2,7 +2,6 @@ package edu.project1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.SplittableRandom;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestSession {
@@ -69,6 +68,4 @@ public class TestSession {
 
         assertEquals(guessResult, session.giveUp(GIVE_UP));
     }
-
-
 }
