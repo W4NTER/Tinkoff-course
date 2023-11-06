@@ -9,6 +9,10 @@ public final class Position {
         this.y = y;
     }
 
+    public String getPoint() {
+        return String.valueOf(x) + String.valueOf(y);
+    }
+
     public int getX() {
         return x;
     }
@@ -24,4 +28,5 @@ public final class Position {
     public void setY(int y) {
         this.y = y;
     }
+
 }

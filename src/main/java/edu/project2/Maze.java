@@ -50,7 +50,7 @@ public class Maze {
         var neighbours = findNeighbours(currPosition);
 
         while (noVisitCount > 0) {
-            while (neighbours.size() == 0) {
+            while (neighbours.isEmpty()) {
                 currPosition = stack.pop();
                 neighbours = findNeighbours(currPosition);
             }
@@ -81,16 +81,60 @@ public class Maze {
         return res;
     }
 
+    public List<Position> neighboursInCreatedMaze(Position position) {
+        List<Position> res = new ArrayList<>();
+        if (position.getX() > 1 && maze[position.getY()][position.getX() - 1] == 0) {
+            res.add(new Position(position.getX() - 1, position.getY()));
+        }
+        if (position.getY() > 1 && maze[position.getY() - 1][position.getX()] == 0) {
+            res.add(new Position(position.getX(), position.getY() - 1));
+        }
+        if (position.getX() < maze[0].length - 1 && maze[position.getY()][position.getX() + 1] == 0) {
+            res.add(new Position(position.getX() + 1, position.getY()));
+        }
+        if (position.getY() < maze.length - 1 && maze[position.getY() + 1][position.getX()] == 0) {
+            res.add(new Position(position.getX(), position.getY() + 1));
+        }
+        return res;
+    }
+
+    public void findPath(int startX, int startY, int desiredX, int desiredY) {
+        Stack<Position> stackPath = new Stack<>();
+        Position currPosition = new Position(startX, startY);
+        Position finalPosition = new Position(desiredX, desiredY);
+        maze[currPosition.getX()][currPosition.getX()] = 2;
+        stackPath.push(currPosition);
+        var neighbours = neighboursInCreatedMaze(currPosition);
+        Random random = new Random();
+        Position prevPosition = currPosition;
+        while (!currPosition.getPoint().equals(finalPosition.getPoint())) {
+            while (neighbours.isEmpty()) {
+                currPosition = stackPath.pop();
+                neighbours = neighboursInCreatedMaze(currPosition);
+                maze[prevPosition.getY()][prevPosition.getX()] = 3;
+                prevPosition = currPosition;
+            }
+            currPosition = neighbours.get(random.nextInt(neighbours.size()));
+            maze[currPosition.getY()][currPosition.getX()] = 2;
+            stackPath.push(currPosition);
+            neighbours = neighboursInCreatedMaze(currPosition);
+        }
+
+    }
+
+
     public void printMaze() {
-//        Arrays.stream(maze).map(Arrays::toString).forEach(System.out::println);
-//        Logger LOGGER = LogManager.getLogger();
         StringBuilder output = new StringBuilder("\n");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (maze[i][j] == 1) {
-                    output.append("█ ");
-                } else {
+                    output.append("██");
+//                    output.append(1);
+                } else if (maze[i][j] == 0 || maze[i][j] == 3){
                     output.append("  ");
+//                    output.append(0);
+                } else {
+                    output.append("**");
                 }
             }
             output.append("\n");
