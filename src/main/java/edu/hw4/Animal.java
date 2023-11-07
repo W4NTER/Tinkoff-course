@@ -12,7 +12,7 @@ public record Animal(
     private static final int PAWS_CAT_DOG = 4;
     private static final int PAWS_BIRD = 2;
     private static final int PAWS_FISH = 0;
-    private static final int PAWS_SPIDER = 4;
+    private static final int PAWS_SPIDER = 8;
 
     enum Type {
         CAT, DOG, BIRD, FISH, SPIDER

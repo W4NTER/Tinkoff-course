@@ -63,7 +63,7 @@ public class task8Test {
     @DisplayName("Нахождение количества животных каждого типа")
     void testThatCountAnimalsOfAnyTypeReturnedSucceed() {
         final Map<Animal.Type, Integer> EXPECTED_VALUE = Map.of(Animal.Type.DOG, 1, Animal.Type.CAT,
-            1, Animal.Type.FISH, 1, Animal.Type.BIRD, 1);
+            1, Animal.Type.FISH, 1, Animal.Type.BIRD, 1,  Animal.Type.SPIDER, 1);
 
         Map<Animal.Type, Integer> result = Tasks.countOfAnimalsAnyType(ANIMALS);
 
@@ -73,8 +73,8 @@ public class task8Test {
     @Test
     @DisplayName("Проверка сортировки животных по весу от самого тяжелого к самому легкому и взятие к нужных")
     void testThatSortAnimalsByMaxWeightSelectKFirstReturnedSucceed() {
-        final List<Animal> EXPECTED_LIST = List.of(ANIMALS.get(0), ANIMALS.get(1), ANIMALS.get(3));
-        final int SELECTED_VALUE = 3;
+        final List<Animal> EXPECTED_LIST = List.of(ANIMALS.get(0), ANIMALS.get(1));
+        final int SELECTED_VALUE = 2;
 
         List<Animal> result = Tasks.sortAnimalsByMaxWeightSelectKFirst(ANIMALS, SELECTED_VALUE);
 
@@ -84,7 +84,7 @@ public class task8Test {
     @Test
     @DisplayName("Проверка сотрировки животных по возрастанию роста")
     void TestThatSortAnimalsByHeightReturnedSucceed() {
-        final List<Animal> EXPECTED_LIST = List.of(ANIMALS.get(2), ANIMALS.get(3), ANIMALS.get(1), ANIMALS.get(0));
+        final List<Animal> EXPECTED_LIST = List.of(ANIMALS.get(2), ANIMALS.get(3), ANIMALS.get(4), ANIMALS.get(1), ANIMALS.get(0));
 
         List<Animal> result = Tasks.sortAnimalsByHeight(ANIMALS);
 
@@ -94,7 +94,7 @@ public class task8Test {
     @Test
     @DisplayName("Сумма лап всех животных в сприске")
     void testThatSumOfAllAnimals() {
-        final Integer COUNT_PAWS_AT_LIST = 10;
+        final Integer COUNT_PAWS_AT_LIST = 18;
 
         Integer result = Tasks.sumAnimalsPaws(ANIMALS);
 
@@ -102,9 +102,9 @@ public class task8Test {
     }
 
     @Test
-    @DisplayName("Проверка списка животных с одинаковыми: количеством лап и возраста")
+    @DisplayName("Проверка списка животных с несовподающими: количеством лап и возраста")
     void testThatFindAnimalsWitchPawsEqualAgeReturnedSucceed() {
-        final List<Animal> EXPECTED_LIST = List.of(ANIMALS.get(0), ANIMALS.get(1), ANIMALS.get(2));
+        final List<Animal> EXPECTED_LIST = List.of(ANIMALS.get(0), ANIMALS.get(1), ANIMALS.get(2), ANIMALS.get(4));
 
         List<Animal> result = Tasks.listAnimalWhichPawsEqualAge(ANIMALS);
 
