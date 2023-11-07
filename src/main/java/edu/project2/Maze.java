@@ -130,7 +130,7 @@ public class Maze {
                 if (maze[i][j] == 1) {
                     output.append("██");
 //                    output.append(1);
-                } else if (maze[i][j] == 0 || maze[i][j] == 3){
+                } else if (maze[i][j] == 0 || maze[i][j] == 3) {
                     output.append("  ");
 //                    output.append(0);
                 } else {
