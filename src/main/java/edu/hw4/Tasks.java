@@ -5,7 +5,6 @@ import edu.hw4.Animal.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +13,8 @@ import java.util.stream.Collectors;
 public final class Tasks {
     private Tasks() {
     }
+
+    private final static Integer HEIGHT_BITES_ANIMALS = 100;
 
     public static List<Animal> sortAnimalsByHeight(List<Animal> animals) { //Task1
         List<Animal> result = new ArrayList<>(animals);
@@ -68,7 +69,8 @@ public final class Tasks {
     }
 
     public static List<Animal> animalsWhoCanBiteAndUpperMeter(List<Animal> animals) { //Task11
-        return animals.stream().filter(Animal::bites).filter(animal -> animal.height() > 100).collect(Collectors.toList());
+        return animals.stream().filter(Animal::bites)
+            .filter(animal -> animal.height() > HEIGHT_BITES_ANIMALS).collect(Collectors.toList());
     }
 
     public static Integer animalsWithWeightMoreThenHeight(List<Animal> animals) { //Task12
@@ -83,9 +85,10 @@ public final class Tasks {
         return animals.stream().anyMatch(a -> a.type().equals(Type.DOG) && a.height() > k);
     }
 
-    public static Map<Type, Integer> sumWeightAnimalsWithSpecialAge(List<Animal> animals, Integer k, Integer l) { //Task15
+    public static Map<Type, Integer> sumWeightAnimalsWithSpecialAge(List<Animal> animals,
+        Integer k, Integer l) { //Task15
         return animals.stream().filter(animal -> animal.age() > k && animal.age() < l)
-            .collect(Collectors.toMap(Animal::type, Animal::age,Integer::sum
+            .collect(Collectors.toMap(Animal::type, Animal::age, Integer::sum
         ));
     }
 }
