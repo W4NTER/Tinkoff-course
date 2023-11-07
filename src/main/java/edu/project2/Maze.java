@@ -13,6 +13,8 @@ public class Maze {
     private int cols;
     private int[][] maze;
     private final static int START_POSITION = 1;
+    private final static int PASSAGE = 0;
+    private final static int PATH = 3;
 
     public Maze(int rows, int cols) {
         this.cols = cols;
@@ -111,7 +113,7 @@ public class Maze {
             while (neighbours.isEmpty()) {
                 currPosition = stackPath.pop();
                 neighbours = neighboursInCreatedMaze(currPosition);
-                maze[prevPosition.getY()][prevPosition.getX()] = 3;
+                maze[prevPosition.getY()][prevPosition.getX()] = PATH;
                 prevPosition = currPosition;
             }
             currPosition = neighbours.get(random.nextInt(neighbours.size()));
@@ -129,10 +131,8 @@ public class Maze {
             for (int j = 0; j < cols; j++) {
                 if (maze[i][j] == 1) {
                     output.append("██");
-//                    output.append(1);
-                } else if (maze[i][j] == 0 || maze[i][j] == 3) {
+                } else if (maze[i][j] == PASSAGE || maze[i][j] == PATH) {
                     output.append("  ");
-//                    output.append(0);
                 } else {
                     output.append("**");
                 }
