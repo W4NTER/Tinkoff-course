@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.RecursiveTask;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -103,8 +102,11 @@ public final class Tasks {
         double dogCount = animals.stream().filter(a -> a.type().equals(Type.DOG)).count();
         double spiderCount = animals.stream().filter(a -> a.type().equals(Type.SPIDER)).count();
 
-        double dogBiteCount = animals.stream().filter(a -> a.type().equals(Type.DOG)).filter(Animal::bites).count();
-        double spiderBiteCount = animals.stream().filter(a -> a.type().equals(Type.SPIDER)).filter(Animal::bites).count();
+        double dogBiteCount = animals.stream()
+            .filter(a -> a.type().equals(Type.DOG)).filter(Animal::bites).count();
+
+        double spiderBiteCount = animals.stream()
+            .filter(a -> a.type().equals(Type.SPIDER)).filter(Animal::bites).count();
 
         return dogBiteCount / dogCount < spiderBiteCount / spiderCount;
     }
