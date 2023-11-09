@@ -3,12 +3,15 @@ package edu.hw4;
 import edu.hw4.Animal.Sex;
 import edu.hw4.Animal.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.RecursiveTask;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Tasks {
     private Tasks() {
@@ -40,11 +43,7 @@ public final class Tasks {
         long i = animals.stream().filter(animal -> animal.sex().equals(Sex.M)).count();
         long j = animals.stream().filter(animal -> animal.sex().equals(Sex.F)).count();
 
-        if (i >= j) {
-            return Sex.M;
-        } else {
-            return Sex.F;
-        }
+        return i >= j ? Sex.M : Sex.F;
     }
 
     public static Map<Type, Animal> heaviestAnimalOfAnyType(List<Animal> animals) { //Task6
@@ -90,5 +89,31 @@ public final class Tasks {
         return animals.stream().filter(animal -> animal.age() > k && animal.age() < l)
             .collect(Collectors.toMap(Animal::type, Animal::age, Integer::sum
         ));
+    }
+
+    public static List<Animal> sortedAnimalsByTypeSexName(List<Animal> animals) { //Task16
+        return animals.stream()
+            .sorted(Comparator.comparing(Animal::type)
+            .thenComparing(Animal::sex)
+            .thenComparing(Animal::name))
+            .collect(Collectors.toList());
+    }
+
+    public static Boolean spidersBiteMoreThanDogs(List<Animal> animals) { //Task17
+        double dogCount = animals.stream().filter(a -> a.type().equals(Type.DOG)).count();
+        double spiderCount = animals.stream().filter(a -> a.type().equals(Type.SPIDER)).count();
+
+        double dogBiteCount = animals.stream().filter(a -> a.type().equals(Type.DOG)).filter(Animal::bites).count();
+        double spiderBiteCount = animals.stream().filter(a -> a.type().equals(Type.SPIDER)).filter(Animal::bites).count();
+
+        return dogBiteCount / dogCount < spiderBiteCount / spiderCount;
+    }
+
+    public static Animal heaviestFishFromTwoLists(List<Animal> animals, List<Animal> animals2) { //Task18
+        return Collections.max(Stream.of(animals, animals2)
+            .flatMap(Collection::stream)
+            .toList().stream()
+            .filter(a -> a.type().equals(Type.FISH)).toList(),
+            Comparator.comparing(Animal::age));
     }
 }

@@ -1,5 +1,8 @@
 package edu.hw4;
 
+import java.awt.geom.RectangularShape;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -173,5 +176,61 @@ public class task8Test {
         Map<Animal.Type, Animal> result = Tasks.heaviestAnimalOfAnyType(ANIMALS);
 
         assertEquals(EXPECTED_MAP, result);
+    }
+
+    @Test
+    @DisplayName("Проверка сортировки по типу -> полу -> имени")
+    void testThatSortAnimalsByTypeSexNameReturnedSucceed() {
+        final List<Animal> ANIMALS_FOR_SORT = List.of(
+            new Animal("Ann", Animal.Type.CAT, Animal.Sex.F, 1, 20, 1, true),
+            new Animal("Matroskin", Animal.Type.CAT, Animal.Sex.M, 8, 40, 3, true),
+            new Animal("Bobik", Animal.Type.DOG, Animal.Sex.M, 10, 120, 7, true)
+        );
+        final List<Animal> EXPECTED_LIST =
+            List.of(ANIMALS_FOR_SORT.get(1), ANIMALS_FOR_SORT.get(0), ANIMALS_FOR_SORT.get(2));
+
+        List<Animal> result = Tasks.sortedAnimalsByTypeSexName(ANIMALS_FOR_SORT);
+
+        assertEquals(EXPECTED_LIST, result);
+    }
+
+    @Test
+    @DisplayName("Правда ли, что пауки кусаются чаще собак?")
+    void testThatSpidersBiteMoreThanDogsReturnedSucceed() {
+        final List<Animal> ANIMALS_FOR_TEST = List.of(
+            new Animal("Ann", Animal.Type.DOG, Animal.Sex.F, 1, 20, 1, true),
+            new Animal("Matroskin", Animal.Type.DOG, Animal.Sex.M, 8, 40, 3, false),
+            new Animal("Bobik", Animal.Type.SPIDER, Animal.Sex.M, 10, 120, 7, true),
+            new Animal("Bobik", Animal.Type.SPIDER, Animal.Sex.M, 10, 120, 7, true),
+            new Animal("Bobik", Animal.Type.SPIDER, Animal.Sex.M, 10, 120, 7, false)
+        );
+
+        Boolean result = Tasks.spidersBiteMoreThanDogs(ANIMALS_FOR_TEST);
+
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Проверка нахождения самой старой рыбы в нескольких списках (исп 2 списка)")
+    void testThatFindHeaviestFishByAnyListsUsedTwoLists() {
+        final List<Animal> ANIMALS_FOR_TEST = List.of(
+            new Animal("Ann", Animal.Type.DOG, Animal.Sex.F, 1, 20, 1, true),
+            new Animal("Matroskin", Animal.Type.DOG, Animal.Sex.M, 8, 40, 3, false),
+            new Animal("Bobik", Animal.Type.FISH, Animal.Sex.M, 10, 120, 999, true),
+            new Animal("Bobik", Animal.Type.FISH, Animal.Sex.M, 10, 120, 2, true),
+            new Animal("Bobik", Animal.Type.FISH, Animal.Sex.M, 10, 120, 1, false)
+        );
+        final List<Animal> ANIMALS_FOR_TEST2 = List.of(
+            new Animal("Ann", Animal.Type.DOG, Animal.Sex.F, 1, 20, 1, true),
+            new Animal("Matroskin", Animal.Type.FISH, Animal.Sex.M, 8, 40, 3, false),
+            new Animal("Bobik", Animal.Type.FISH, Animal.Sex.M, 10, 120, 7, true),
+            new Animal("Bobik", Animal.Type.SPIDER, Animal.Sex.M, 10, 120, 7, true),
+            new Animal("Bobik", Animal.Type.SPIDER, Animal.Sex.M, 10, 120, 7, false)
+        );
+        final Animal EXPECTED_VALUE = ANIMALS_FOR_TEST.get(2);
+
+        Animal result = Tasks.heaviestFishFromTwoLists(ANIMALS_FOR_TEST, ANIMALS_FOR_TEST2);
+
+        assertEquals(EXPECTED_VALUE, result);
     }
 }
