@@ -3,8 +3,8 @@ package edu.project2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindNeighbours implements Neighbors {
-    @Override
+public class FindNeighbours {
+
     public List<Position> findNeighbours(Position position, int distance, int[][] maze, int notChecked) {
         List<Position> res = new ArrayList<>();
         if (position.getX() > distance
