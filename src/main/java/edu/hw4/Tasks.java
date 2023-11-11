@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -117,5 +118,16 @@ public final class Tasks {
             .toList().stream()
             .filter(a -> a.type().equals(Type.FISH)).toList(),
             Comparator.comparing(Animal::age));
+    }
+
+    public static Map<Animal, Set<ValidationError>> animalsWithErrors(List<Animal> animals) { //Task19
+        return animals.stream().filter(animal -> animal.height() < 0 || animal.weight() < 0)
+            .collect(Collectors.toMap(animal -> animal,
+            ValidationError::validateErrors));
+    }
+
+    public static Map<String, String> animalsWithErrorsStringFormat(List<Animal> animals) { //Task20
+        return animals.stream().filter(animal -> animal.height() < 0 || animal.weight() < 0)
+            .collect(Collectors.toMap(Animal::name, ValidationError::validateErrorsString));
     }
 }

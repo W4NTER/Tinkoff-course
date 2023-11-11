@@ -1,11 +1,8 @@
 package edu.hw4;
 
 import java.awt.geom.RectangularShape;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -232,5 +229,22 @@ public class task8Test {
         Animal result = Tasks.heaviestFishFromTwoLists(ANIMALS_FOR_TEST, ANIMALS_FOR_TEST2);
 
         assertEquals(EXPECTED_VALUE, result);
+    }
+
+    @Test
+    @DisplayName("Животные в полях которых есть ошибки в формате вывода: имя -> поля в которых есть ошибки")
+    void testThatAnimalsWithErrorsWithStringOutputReturnedSucceed() {
+        final List<Animal> ANIMALS_FOR_TEST = List.of(
+            new Animal("Bobik", Animal.Type.DOG, Animal.Sex.F, 1, -12, 1, true),
+            new Animal("Matroskin", Animal.Type.DOG, Animal.Sex.M, 8, 40, -209, false)
+        );
+        final List<String> VALUES_WITH_ERRORS = List.of("height", "weight");
+
+        final Map<String, String> EXPECTED_MAP = Map.of(ANIMALS_FOR_TEST.get(0).name(), VALUES_WITH_ERRORS.get(0),
+            ANIMALS_FOR_TEST.get(1).name(), VALUES_WITH_ERRORS.get(1));
+
+        Map<String, String> result = Tasks.animalsWithErrorsStringFormat(ANIMALS_FOR_TEST);
+
+        assertEquals(EXPECTED_MAP, result);
     }
 }
