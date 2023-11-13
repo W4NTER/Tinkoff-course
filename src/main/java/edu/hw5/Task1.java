@@ -14,25 +14,25 @@ public final class Task1 {
     public static long timeInClub(String input) throws ParseException {
         String[] strStartEnd = input.split(" - ");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd, hh:mm");
-        Long time = format.parse(strStartEnd[1]).getTime() - format.parse(strStartEnd[0]).getTime();
+        long time = format.parse(strStartEnd[1]).getTime() - format.parse(strStartEnd[0]).getTime();
         Duration duration = Duration.ofMillis(time);
         return duration.getSeconds();
     }
 
-    public static String averageTimeInTheClub(String[] input) throws ParseException { //обработать ошибку
+    public static String averageTimeInTheClub(String[] input) throws ParseException {
         long fullTimeInClub = 0;
         for (String time : input) {
             fullTimeInClub += timeInClub(time);
         }
         long averageTimeInClub = fullTimeInClub / input.length;
-        //Может получиться неровное число, переделать на даблы, сделать округление
         long hours = averageTimeInClub / SECONDS_IN_HOUR;
-        long min = (averageTimeInClub % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE;
-        return String.format("%dч %dм", hours, min);
+        long minutes = (averageTimeInClub % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE;
+        long seconds = ((averageTimeInClub % SECONDS_IN_HOUR) % SECONDS_IN_MINUTE) % SECONDS_IN_MINUTE;
+        return String.format("%dч %dм %dс", hours, minutes, seconds);
     }
 
 //    public static void main(String[] args) throws ParseException {
-//        String[] str = {"2022-04-01, 21:30 - 2022-04-02, 01:20", "2022-03-12, 20:20 - 2022-03-12, 23:50"};
+//        String[] str = {"2022-04-01, 21:30 - 2022-04-02, 01:23", "2022-03-12, 20:20 - 2022-03-12, 23:50"};
 //        System.out.println((averageTimeInTheClub(str)));
 //    }
 }
