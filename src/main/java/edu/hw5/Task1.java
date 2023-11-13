@@ -30,9 +30,4 @@ public final class Task1 {
         long seconds = ((averageTimeInClub % SECONDS_IN_HOUR) % SECONDS_IN_MINUTE) % SECONDS_IN_MINUTE;
         return String.format("%dч %dм %dс", hours, minutes, seconds);
     }
-
-//    public static void main(String[] args) throws ParseException {
-//        String[] str = {"2022-04-01, 21:30 - 2022-04-02, 01:23", "2022-03-12, 20:20 - 2022-03-12, 23:50"};
-//        System.out.println((averageTimeInTheClub(str)));
-//    }
 }
