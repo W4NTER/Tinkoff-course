@@ -8,10 +8,10 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task1Test {
-    private final DiskMap DISK_MAP =
-        new DiskMap("test.txt");
-    private final File FILE =
-        new File("test.txt");
+//    private final DiskMap DISK_MAP =
+//        new DiskMap("test.txt");
+//    private final File FILE =
+//        new File("test.txt");
     //Изначально в файле вот такие данные:
     //Str:Str
     //name:surname
