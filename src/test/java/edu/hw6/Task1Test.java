@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task1Test {
     private final DiskMap DISK_MAP =
-        new DiskMap("C:\\Users\\snego\\OneDrive\\Рабочий стол\\Учеба\\Tinkoff_java\\test.txt");
+        new DiskMap("test.txt");
     private final File FILE =
-        new File("C:\\Users\\snego\\OneDrive\\Рабочий стол\\Учеба\\Tinkoff_java\\test.txt");
+        new File("test.txt");
     //Изначально в файле вот такие данные:
     //Str:Str
     //name:surname
