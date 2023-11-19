@@ -37,8 +37,4 @@ public final class Task2 {
         Path copyPath = Paths.get(directory, copyName + extension);
         Files.copy(path, copyPath);
     }
-
-//    public static void main(String[] args) throws IOException {
-//        clone(Paths.get("C:\\Users\\snego\\OneDrive\\Рабочий стол\\Учеба\\Tinkoff_java\\test.txt"));
-//    }
 }
