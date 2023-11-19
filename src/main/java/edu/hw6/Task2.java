@@ -1,13 +1,14 @@
 package edu.hw6;
 
-import java.awt.SystemTray;
 import java.io.IOException;
-import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Task2 {
+public final class Task2 {
+    private Task2() {
+
+    }
 
     public static void clone(Path path) throws IOException {
         if (Files.exists(path)) {
@@ -37,7 +38,7 @@ public class Task2 {
         Files.copy(path, copyPath);
     }
 
-    public static void main(String[] args) throws IOException {
-        clone(Paths.get("C:\\Users\\snego\\OneDrive\\Рабочий стол\\Учеба\\Tinkoff_java\\test.txt"));
-    }
+//    public static void main(String[] args) throws IOException {
+//        clone(Paths.get("C:\\Users\\snego\\OneDrive\\Рабочий стол\\Учеба\\Tinkoff_java\\test.txt"));
+//    }
 }
