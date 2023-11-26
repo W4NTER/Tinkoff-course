@@ -23,9 +23,4 @@ public final class Task3 {
         DirectoryStream.Filter<? super Path> filter) throws IOException {
         return Files.newDirectoryStream(dir, filter);
     }
-
-    public static void main(String[] args) throws IOException {
-
-        newDirectoryStream(Path.of("./.github")).forEach(System.out::println);
-    }
 }
