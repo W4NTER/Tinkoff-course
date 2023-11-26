@@ -33,5 +33,4 @@ public class Task1Test {
         assertEquals(EXPECTED_MAP.get(EXPECTED_KEY2), result.get(EXPECTED_KEY2));
         assertEquals(EXPECTED_MAP.get(EXPECTED_KEY3), result.get(EXPECTED_KEY3));
     }
-    //Тест проходит, но ломается билд, на гите, хз как тестить работу с файлами
 }

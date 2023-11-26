@@ -14,12 +14,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class Task4 {
-    private Task4() {
-
+    private Task4() throws IOException {
     }
 
     private final static Logger LOGGER = LogManager.getLogger();
-//    private Files file;
 
     public static void writeText() {
         try (OutputStream file = Files.newOutputStream(Paths.get("text.txt"));
@@ -27,8 +25,8 @@ public final class Task4 {
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
             OutputStreamWriter outputStreamWriter =
                 new OutputStreamWriter(bufferedOutputStream, StandardCharsets.UTF_8);
-            PrintWriter printWriter = new PrintWriter(outputStreamWriter)) {
-            printWriter.println("Programming is learned by writing programs. ― Brian Kernighan");
+             PrintWriter out = new PrintWriter(outputStreamWriter, true)) {
+            out.println("Programming is learned by writing programs. ― Brian Kernighan");
         } catch (IOException e) {
             LOGGER.info(e.getMessage());
         }

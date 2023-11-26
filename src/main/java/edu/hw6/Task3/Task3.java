@@ -12,18 +12,20 @@ public final class Task3 {
     public static AbstractFilter readable = Files::isReadable;
 
     public static DirectoryStream<Path> newDirectoryStream(Path dir) throws IOException {
-        DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dir);
-        return directoryStream;
+        return Files.newDirectoryStream(dir);
     }
 
     public static DirectoryStream<Path> newDirectoryStream(Path dir, String glob) throws IOException {
-        DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dir, "*" + glob);
-        return directoryStream;
+        return Files.newDirectoryStream(dir, "*" + glob);
     }
 
     public static DirectoryStream<Path> newDirectoryStream(Path dir,
         DirectoryStream.Filter<? super Path> filter) throws IOException {
-        DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dir, filter);
-        return directoryStream;
+        return Files.newDirectoryStream(dir, filter);
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        newDirectoryStream(Path.of("./.github")).forEach(System.out::println);
     }
 }
