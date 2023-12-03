@@ -2,6 +2,9 @@ package edu.hw7;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.LongStream;
 
 public final class Task2 {
@@ -18,9 +21,5 @@ public final class Task2 {
             .rangeClosed(1, num)
             .parallel()
             .reduce(1, (a, b) -> a * b);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(factorial(16));
     }
 }
