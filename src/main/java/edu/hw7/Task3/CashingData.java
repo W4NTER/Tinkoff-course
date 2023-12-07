@@ -4,78 +4,104 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public final class CashingData implements PersonDatabase{
-    private final Map<Integer, Person> personMap;
-    private final Map<Integer, String> nameIndex;
-    private final Map<Integer, String> addressIndex;
-    private final Map<Integer, String> phoneNumberIndex;
-
-    public CashingData(){
-        this.personMap = new HashMap<>();
-        this.nameIndex = new HashMap<>();
-        this.addressIndex = new HashMap<>();
-        this.phoneNumberIndex = new HashMap<>();
-    }
+public class CashingData implements PersonDatabase {
+    private final Map<Integer, Person> personMap = new HashMap<>();
+    private final Map<String, List<Integer>> nameMap = new HashMap<>();
+    private final Map<String, List<Integer>> addressMap = new HashMap<>();
+    private final Map<String, List<Integer>> phoneMap = new HashMap<>();
+    private final static Logger LOGGER = LogManager.getLogger();
 
     @Override
     public synchronized void add(Person person) {
+        if (!nameMap.containsKey(person.name())) {
+            nameMap.put(person.name(), new ArrayList<>());
+        }
+        if (!addressMap.containsKey(person.address())) {
+            addressMap.put(person.address(), new ArrayList<>());
+        }
+        if (!phoneMap.containsKey(person.phoneNumber())) {
+            phoneMap.put(person.phoneNumber(), new ArrayList<>());
+        }
+
         personMap.put(person.id(), person);
-        nameIndex.put(person.id(), person.name());
-        addressIndex.put(person.id(), person.address());
-        phoneNumberIndex.put(person.id(), person.phoneNumber());
+        nameMap.get(person.name()).add(person.id());
+        addressMap.get(person.address()).add(person.id());
+        phoneMap.get(person.phoneNumber()).add(person.id());
     }
 
     @Override
     public synchronized void delete(int id) {
-        Person person = personMap.remove(id);
-        if (person != null) {
-            nameIndex.remove(person.id());
-            addressIndex.remove(person.id());
-            phoneNumberIndex.remove(person.id());
+        Person currPerson = personMap.get(id);
+
+        if (currPerson == null) {
+            LOGGER.info("This person ain't exists");
+            return;
         }
+
+        var nameIds = new ArrayList<>(nameMap.get(currPerson.name()));
+        var addressIds = new ArrayList<>(addressMap.get(currPerson.address()));
+        var phoneIds = new ArrayList<>(phoneMap.get(currPerson.phoneNumber()));
+
+        personMap.remove(id);
+
+        nameMap.put(currPerson.name(), nameIds.stream().filter(a -> a != currPerson.id()).toList());
+        addressMap.put(currPerson.address(), addressIds.stream().filter(a -> a != currPerson.id()).toList());
+        phoneMap.put(currPerson.phoneNumber(), phoneIds.stream().filter(a -> a != currPerson.id()).toList());
     }
 
     @Override
     public synchronized List<Person> findByName(String name) {
-        if (nameIndex.containsValue(name)) {
-            return new ArrayList<>(personMap.get(nameIndex.);
+        List<Person> personsWithThisName = new ArrayList<>();
+        List<Integer> ids = nameMap.get(name);
+        for (Integer id : ids) {
+            personsWithThisName.add(personMap.get(id));
         }
-        return new ArrayList<>();
+        return personsWithThisName;
     }
 
     @Override
     public synchronized List<Person> findByAddress(String address) {
-        if (addressIndex.containsKey(address)) {
-            return new ArrayList<>(personMap.values());
+        List<Person> personsWithThisAddress = new ArrayList<>();
+        List<Integer> ids = addressMap.get(address);
+        for (Integer id : ids) {
+            personsWithThisAddress.add(personMap.get(id));
         }
-        return new ArrayList<>();
+        return personsWithThisAddress;
     }
 
     @Override
-    public synchronized List<Person> findByPhone(String phone) {
-        if (phoneNumberIndex.containsKey(phone)) {
-            return new ArrayList<>(personMap.values());
+    public List<Person> findByPhone(String phone) {
+        List<Person> personsWithThisPhone = new ArrayList<>();
+        List<Integer> ids = phoneMap.get(phone);
+        for (Integer id : ids) {
+            personsWithThisPhone.add(personMap.get(id));
         }
-        return new ArrayList<>();
+        return personsWithThisPhone;
     }
 
     public static void main(String[] args) {
         Person person = new Person(1, "name", "Pushkina", "8800");
         Person person2 = new Person(2, "Sanya", "Pushkina1", "8800");
-        Person person3 = new Person(3, "Hui", "Pushkina2", "8800");
+        Person person3 = new Person(3, "name", "Pushkina2", "8800");
         Person person4 = new Person(4, "Sos", "Pushkina3", "8800");
         Person person1 = new Person(5, "name1", "Pushkina2", "88001");
         CashingData data = new CashingData();
         data.add(person);
-        data.add(person1);
         data.add(person2);
         data.add(person3);
         data.add(person4);
+        data.add(person1);
 
         data.delete(4);
-        System.out.println(data.findByName("name1"));
+        System.out.println(data.findByName("name"));
         System.out.println(data.findByAddress("Pushkina2"));
-        System.out.println(data.findByPhone("88001"));
+        System.out.println(data.findByPhone("8800"));
+        System.out.println(data.personMap);
+        System.out.println(data.phoneMap);
+        System.out.println(data.nameMap);
+        System.out.println(data.addressMap);
     }
 }
