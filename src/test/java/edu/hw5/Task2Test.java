@@ -13,11 +13,10 @@ public class Task2Test {
     void testThatFindFridays13thInTheYearReturnedSucceed() {
         final int TEST_YEAR = 2024;
 
-        final List<LocalDate> EXPECTED_VALUE = List.of(LocalDate.of(2024, Month.SEPTEMBER, 13),
-            LocalDate.of(2024, Month.DECEMBER, 13));
-
         List<LocalDate> result = Task2.findFridays13InTheYear(TEST_YEAR);
 
+        final List<LocalDate> EXPECTED_VALUE = List.of(LocalDate.of(2024, Month.SEPTEMBER, 13),
+            LocalDate.of(2024, Month.DECEMBER, 13));
         assertEquals(EXPECTED_VALUE, result);
     }
 
@@ -26,10 +25,9 @@ public class Task2Test {
     void testThatFindNextFriday13thReturnedSucceed() {
         final LocalDate TEST_DATE = LocalDate.of(2024, Month.NOVEMBER, 11);
 
-        final LocalDate EXPECTED_VALUE = LocalDate.of(2024, Month.DECEMBER, 13);
-
         LocalDate result = Task2.findNextFriday13th(TEST_DATE);
 
+        final LocalDate EXPECTED_VALUE = LocalDate.of(2024, Month.DECEMBER, 13);
         assertEquals(EXPECTED_VALUE, result);
     }
 }

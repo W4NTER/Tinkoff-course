@@ -8,15 +8,21 @@ public final class Task1 {
     private Task1() {
     }
 
+    private final static SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd, hh:mm");
+    private final static String TIME_SPLIT_HYPHEN = " - ";
     private final static int SECONDS_IN_HOUR = 3600;
     private final static int SECONDS_IN_MINUTE = 60;
 
     public static long timeInClub(String input) throws ParseException {
-        String[] strStartEnd = input.split(" - ");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd, hh:mm");
-        long time = format.parse(strStartEnd[1]).getTime() - format.parse(strStartEnd[0]).getTime();
-        Duration duration = Duration.ofMillis(time);
-        return duration.getSeconds();
+        String[] strStartEnd = input.split(TIME_SPLIT_HYPHEN);
+        long time = computeTimeSpent(strStartEnd);
+        return Duration.ofMillis(time).getSeconds();
+    }
+
+    public static long computeTimeSpent(String[] strStartEnd) throws ParseException {
+        long timeStart = FORMAT.parse(strStartEnd[0]).getTime();
+        long timeEnd = FORMAT.parse(strStartEnd[1]).getTime();
+        return timeEnd - timeStart;
     }
 
     public static String averageTimeInTheClub(String[] input) throws ParseException {

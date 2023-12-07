@@ -11,10 +11,10 @@ public class Task1Test {
     void testThatFindAverageTimeInClubWithTwoInputStringsReturnedSucceed() throws ParseException {
         final String[] STRINGS_FOR_TEST =
             {"2022-04-01, 21:30 - 2022-04-02, 01:23", "2022-03-12, 20:20 - 2022-03-12, 23:50"};
-        final String EXPECTED_VALUE = "3ч 41м 30с";
 
         String result = Task1.averageTimeInTheClub(STRINGS_FOR_TEST);
 
+        final String EXPECTED_VALUE = "3ч 41м 30с";
         assertEquals(EXPECTED_VALUE, result);
     }
 }
