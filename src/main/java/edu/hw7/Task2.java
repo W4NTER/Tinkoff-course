@@ -1,11 +1,8 @@
 package edu.hw7;
 
+import java.util.stream.LongStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.LongStream;
 
 public final class Task2 {
     private Task2() {}

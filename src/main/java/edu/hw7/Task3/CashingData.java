@@ -81,27 +81,4 @@ public class CashingData implements PersonDatabase {
         }
         return personsWithThisPhone;
     }
-
-    public static void main(String[] args) {
-        Person person = new Person(1, "name", "Pushkina", "8800");
-        Person person2 = new Person(2, "Sanya", "Pushkina1", "8800");
-        Person person3 = new Person(3, "name", "Pushkina2", "8800");
-        Person person4 = new Person(4, "Sos", "Pushkina3", "8800");
-        Person person1 = new Person(5, "name1", "Pushkina2", "88001");
-        CashingData data = new CashingData();
-        data.add(person);
-        data.add(person2);
-        data.add(person3);
-        data.add(person4);
-        data.add(person1);
-
-        data.delete(4);
-        System.out.println(data.findByName("name"));
-        System.out.println(data.findByAddress("Pushkina2"));
-        System.out.println(data.findByPhone("8800"));
-        System.out.println(data.personMap);
-        System.out.println(data.phoneMap);
-        System.out.println(data.nameMap);
-        System.out.println(data.addressMap);
-    }
 }
