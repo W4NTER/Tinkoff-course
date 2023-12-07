@@ -27,10 +27,10 @@ public final class Task3 {
         } else if (string.equals("1 day ago")) {
             customDate = Optional.of(LocalDate.now().minusDays(1));
         } else if (string.matches("([1-9]\\d*) days ago$")) {
-            Pattern pattern = Pattern.compile("([1-9]\\d*)");
+           Pattern pattern = Pattern.compile("([1-9]\\d*)");
            Matcher m = pattern.matcher(string);
            m.find();
-            customDate = Optional.of(LocalDate.now().minusDays(Integer.parseInt(m.group(1))));
+           customDate = Optional.of(LocalDate.now().minusDays(Integer.parseInt(m.group(1))));
         }
         return customDate;
     }

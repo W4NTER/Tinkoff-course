@@ -1,6 +1,5 @@
 package edu.hw5;
 
-import java.security.PublicKey;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjuster;
@@ -18,15 +17,11 @@ public final class Task2 {
     public static List<LocalDate> findFridays13InTheYear(int year) {
         List<LocalDate> fridays = new ArrayList<>();
         LocalDate thirteenthInTheYear = LocalDate.of(year, MONTH, THIRTEENTH_DAY_AT_MONTH);
-        return findFridays(fridays, thirteenthInTheYear, year);
-    }
-    
-    public static List<LocalDate> findFridays(List<LocalDate> fridays, LocalDate thirteenth, int year) {
-        while (thirteenth.getYear() == year) {
-            if (thirteenth.getDayOfWeek() == DayOfWeek.FRIDAY) {
-                fridays.add(thirteenth);
+        while (thirteenthInTheYear.getYear() == year) {
+            if (thirteenthInTheYear.getDayOfWeek() == DayOfWeek.FRIDAY) {
+                fridays.add(thirteenthInTheYear);
             }
-            thirteenth = thirteenth.plusMonths(MONTH);
+            thirteenthInTheYear = thirteenthInTheYear.plusMonths(MONTH);
         }
         return fridays;
     }
