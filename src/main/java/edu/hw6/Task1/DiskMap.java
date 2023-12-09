@@ -2,7 +2,6 @@ package edu.hw6.Task1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,16 +16,16 @@ import org.jetbrains.annotations.Nullable;
 
 public class DiskMap implements Map<String, String> {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final File file;
+    private static String path;
 
     public DiskMap(String filePath) {
-        this.file = new File(filePath);
+        path = filePath;
     }
 
     public Map<String, String> readMap() {
         Map<String, String> map = new HashMap<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(path));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] elements = line.split(":");
@@ -42,7 +41,7 @@ public class DiskMap implements Map<String, String> {
     }
 
     private void saveMap(Map<String, String> map) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             for (Map.Entry<String, String> el : map.entrySet()) {
                 writer.write(el.getKey() + ":" + el.getValue());
                 writer.newLine();
