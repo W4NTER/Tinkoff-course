@@ -25,13 +25,17 @@ public final class HackerNews {
     }
 
     public long[] hackerNewsTopStories() throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(TOP_STORIES_URL))
-            .build();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(TOP_STORIES_URL))
+                .build();
 
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return arrOfStories(response);
+            return arrOfStories(response);
+        } catch (Exception e) {
+            return new long[0];
+        }
     }
 
     public static long[] arrOfStories(HttpResponse<String> response) {

@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedOutputStream;
@@ -19,8 +20,8 @@ public final class Task4 {
 
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public static void writeText() {
-        try (OutputStream file = Files.newOutputStream(Paths.get("text.txt"));
+    public static void writeText(Path path) {
+        try (OutputStream file = Files.newOutputStream(path);
             CheckedOutputStream checkedOutputStream = new CheckedOutputStream(file, new CRC32());
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
             OutputStreamWriter outputStreamWriter =
