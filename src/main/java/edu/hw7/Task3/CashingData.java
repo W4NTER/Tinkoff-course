@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public class CashingData implements PersonDatabase {
     private final Map<Integer, Person> personMap = new HashMap<>();
@@ -54,31 +55,28 @@ public class CashingData implements PersonDatabase {
 
     @Override
     public synchronized List<Person> findByName(String name) {
-        List<Person> personsWithThisName = new ArrayList<>();
-        List<Integer> ids = nameMap.get(name);
-        for (Integer id : ids) {
-            personsWithThisName.add(personMap.get(id));
-        }
-        return personsWithThisName;
+        return getPeople(name, nameMap);
     }
 
     @Override
     public synchronized List<Person> findByAddress(String address) {
+        return getPeople(address, addressMap);
+    }
+
+    @Override
+    public synchronized List<Person> findByPhone(String phone) {
+        return getPeople(phone, phoneMap);
+    }
+
+    @NotNull private synchronized List<Person> getPeople(String address, Map<String, List<Integer>> map) {
         List<Person> personsWithThisAddress = new ArrayList<>();
-        List<Integer> ids = addressMap.get(address);
+        List<Integer> ids = map.get(address);
+        if (ids == null) {
+            return new ArrayList<>();
+        }
         for (Integer id : ids) {
             personsWithThisAddress.add(personMap.get(id));
         }
         return personsWithThisAddress;
-    }
-
-    @Override
-    public List<Person> findByPhone(String phone) {
-        List<Person> personsWithThisPhone = new ArrayList<>();
-        List<Integer> ids = phoneMap.get(phone);
-        for (Integer id : ids) {
-            personsWithThisPhone.add(personMap.get(id));
-        }
-        return personsWithThisPhone;
     }
 }
