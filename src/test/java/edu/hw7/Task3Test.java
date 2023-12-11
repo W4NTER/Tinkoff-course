@@ -1,6 +1,7 @@
 package edu.hw7;
 
 import edu.hw7.Task3.CashingData;
+import edu.hw7.Task3.CashingDataReadWriteLock;
 import edu.hw7.Task3.Person;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +16,7 @@ public class Task3Test {
     @Test
     @DisplayName("Проверка вытягивания данных в многопоточном режиме")
     void testThatCatchSomeDataByMultiThreadsReturnedSucceed() {
-        CashingData data = getCashingData();
+        CashingDataReadWriteLock data = getCashingData();
         List<Person> addressIds = new ArrayList<>();
         List<Person> nameIds = new ArrayList<>();
         List<Person> phoneIds = new ArrayList<>();
@@ -39,7 +40,6 @@ public class Task3Test {
         }
 
         if (addressIds.size() == 1) {
-            assertFalse(addressIds.isEmpty());
             assertFalse(nameIds.isEmpty());
             assertFalse(phoneIds.isEmpty());
         } else {
@@ -51,9 +51,9 @@ public class Task3Test {
         //Идея в том что, если успело удалиться, то не найдется ничего, если нет, то найдется все.
     }
 
-    @NotNull private static CashingData getCashingData() {
+    @NotNull private static CashingDataReadWriteLock getCashingData() {
         Person person = new Person(1, "name", "Pushkina", "8800");
-        CashingData data = new CashingData();
+        CashingDataReadWriteLock data = new CashingDataReadWriteLock();
         data.add(person);
 
         return data;
