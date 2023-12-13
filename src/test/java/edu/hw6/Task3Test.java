@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import static edu.hw6.Task3.Filters.globMatches;
 import static edu.hw6.Task3.Filters.largerThan;
 import static edu.hw6.Task3.Filters.readable;
-import static edu.hw6.Task3.Filters.regexMatches;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task3Test {
