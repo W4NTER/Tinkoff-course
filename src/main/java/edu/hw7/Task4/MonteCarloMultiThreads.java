@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadLocalRandom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,9 +27,7 @@ public final class MonteCarloMultiThreads {
             List<Future<Integer>> circleCounts = new ArrayList<>();
 
             for (int i = 0; i < THREAD_COUNT; i++) {
-                Future<Integer> thread = executor.submit(() -> {
-                    return circleCount(radius);
-                });
+                Future<Integer> thread = executor.submit(() -> circleCount(radius));
                 circleCounts.add(thread);
             }
 
@@ -64,7 +63,6 @@ public final class MonteCarloMultiThreads {
     }
 
     private static double coordinate(int radius) {
-        SecureRandom random = new SecureRandom();
-        return random.nextDouble(-radius, radius);
+        return ThreadLocalRandom.current().nextDouble(-radius, radius);
     }
 }
