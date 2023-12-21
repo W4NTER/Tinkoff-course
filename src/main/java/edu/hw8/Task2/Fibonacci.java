@@ -29,7 +29,6 @@ public final class Fibonacci {
             fibMinus2 = fibMinus1;
             fibMinus1 = fib;
         }
-        System.out.println("a");
         return fib;
     }
 
@@ -39,10 +38,9 @@ public final class Fibonacci {
             threadPool.start();
             threadPool.execute(() -> {
                 RES = calcFibonacci(countValues);
-                System.out.println(RES);
             });
             threadPool.close();
-//            Thread.sleep(100);
+            Thread.sleep(100);
 
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
@@ -50,15 +48,4 @@ public final class Fibonacci {
         return RES;
     }
 
-//    public static int test(int countThreads) {
-//        if (countThreads > 0) {
-//            return 0;
-//        }
-//
-//    }
-
-    public static void main(String[] args) {
-        Fibonacci fibonacci = new Fibonacci(10);
-        System.out.println(fibonacci.RES);
-    }
 }

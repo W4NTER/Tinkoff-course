@@ -1,11 +1,8 @@
 package edu.hw8;
 
-import edu.hw8.Task2.Calculator;
 import edu.hw8.Task2.Fibonacci;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.lang.module.FindException;
-import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task2Test {
@@ -16,9 +13,9 @@ public class Task2Test {
         final int COUNT_THREADS = 4;
 
 
-//        final long RESULT = Calculator.getFibValue(COUNT_THREADS, COUNT_VALUES);
+        final long RESULT = Fibonacci.getFibValue(COUNT_THREADS, COUNT_VALUES);
 
-        final long EXPECTED_VALUE = 2880067194370816120L;
-//        assertEquals(EXPECTED_VALUE, RESULT);
+        final long EXPECTED_VALUE = 55;
+        assertEquals(EXPECTED_VALUE, RESULT);
     }
 }
