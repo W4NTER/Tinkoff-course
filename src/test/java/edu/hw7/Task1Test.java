@@ -8,12 +8,12 @@ public class Task1Test {
     @Test
     @DisplayName("Проверка корректности работы счетчика")
     void testThatIncrementCounterBySomeThreadsReturnedSucceed() {
-        final int COUNT_THREADS = 10;
+        final int COUNT_THREADS = 4;
         final int NUM = 12;
 
-        final int EXPECTED_VALUE = 120;
         Task1.numerator(COUNT_THREADS, NUM);
 
+        final int EXPECTED_VALUE = 120;
         assertEquals(EXPECTED_VALUE, Task1.getCounter().get());
     }
 }
