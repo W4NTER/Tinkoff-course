@@ -8,7 +8,7 @@ public class Task1Test {
     @Test
     @DisplayName("Проверка корректности работы счетчика")
     void testThatIncrementCounterBySomeThreadsReturnedSucceed() {
-        final int COUNT_THREADS = 4;
+        final int COUNT_THREADS = 10;
         final int NUM = 12;
 
         Task1.numerator(COUNT_THREADS, NUM);
