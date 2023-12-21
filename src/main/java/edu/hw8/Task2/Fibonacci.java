@@ -38,11 +38,9 @@ public final class Fibonacci {
             });
             threadPool.close();
             Thread.sleep(TIME_SLEEP);
-
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
         }
         return result;
     }
-
 }
