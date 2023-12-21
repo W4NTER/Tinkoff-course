@@ -5,18 +5,15 @@ import org.apache.logging.log4j.Logger;
 
 public final class Fibonacci {
     private static final Logger LOGGER = LogManager.getLogger();
-    private volatile static long RES;
+    private volatile static long result;
+    private final static int START_FIB = 1;
+    private final static int TIME_SLEEP = 100;
 
-    public Fibonacci(long value) {
-        RES = getFibValue(4, value);
-    }
-
-    public static long getRES() {
-        return RES;
+    private Fibonacci() {
     }
 
     public static long calcFibonacci(long value) {
-        if (value <= 1) {
+        if (value <= START_FIB) {
             return value;
         }
 
@@ -37,15 +34,15 @@ public final class Fibonacci {
             ThreadPool threadPool = FixedThreadPool.create(countThreads);
             threadPool.start();
             threadPool.execute(() -> {
-                RES = calcFibonacci(countValues);
+                result = calcFibonacci(countValues);
             });
             threadPool.close();
-            Thread.sleep(100);
+            Thread.sleep(TIME_SLEEP);
 
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
         }
-        return RES;
+        return result;
     }
 
 }
