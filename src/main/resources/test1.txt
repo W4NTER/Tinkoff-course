@@ -1,0 +1,4 @@
+Str:Str
+name:surname
+key:value
+KEY:VALUE
