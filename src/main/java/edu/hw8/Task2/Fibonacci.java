@@ -1,11 +1,8 @@
 package edu.hw8.Task2;
 
+import java.util.concurrent.CompletableFuture;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public final class Fibonacci {
     private static final Logger LOGGER = LogManager.getLogger();
