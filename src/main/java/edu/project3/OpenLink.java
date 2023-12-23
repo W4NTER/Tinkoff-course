@@ -34,13 +34,4 @@ public class OpenLink {
             return new String[0];
         }
     }
-
-    public static void main(String[] args) {
-        OpenLink getLogs = new OpenLink();
-        String[] arr = getLogs.openLink("https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs");
-        for (String log: arr) {
-            System.out.println(log);
-        }
-        System.out.println(arr.length);
-    }
 }

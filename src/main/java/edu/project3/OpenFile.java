@@ -1,16 +1,11 @@
 package edu.project3;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import javax.management.openmbean.OpenMBeanAttributeInfo;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public final class OpenFile {
     BufferedReader bufferedReader;
@@ -32,13 +27,5 @@ public final class OpenFile {
         }
         String[] result = new String[res.size()];
         return res.toArray(result);
-    }
-
-    public static void main(String[] args) {
-        OpenFile openFile = new OpenFile();
-        String[] arr = openFile.readFile("src/main/resources/logs.txt");
-        for (String a : arr) {
-            System.out.println(a);
-        }
     }
 }
