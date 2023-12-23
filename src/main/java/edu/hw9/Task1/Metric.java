@@ -7,6 +7,7 @@ import java.util.concurrent.Future;
 
 public class Metric {
     private final double[] data;
+    private final static int COUNT_THREADS = 4;
     private final String metricName;
     private final Double sumVal;
     private final Double avg;
@@ -24,7 +25,7 @@ public class Metric {
 
     public Double getMultiRes(Double lambda) {
         try {
-            ExecutorService service = Executors.newFixedThreadPool(4);
+            ExecutorService service = Executors.newFixedThreadPool(COUNT_THREADS);
             Future<Double> res = service.submit(() -> lambda);
             service.shutdown();
             return res.get();
