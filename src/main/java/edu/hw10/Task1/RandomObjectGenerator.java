@@ -1,17 +1,15 @@
 package edu.hw10.Task1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.lang.reflect.Parameter;
 import java.util.Random;
 import java.util.UUID;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class RandomObjectGenerator {
     private final static Logger LOGGER = LogManager.getLogger();
@@ -22,50 +20,40 @@ public class RandomObjectGenerator {
 
     public <T> T nextObject(Class<T> clazz) {
         try {
-            Constructor<T> constructor = clazz.getDeclaredConstructor();
+            Constructor<?> constructor = getConstructor(clazz);
             constructor.setAccessible(true);
-            T instance;
 
-            constructor.setAccessible(true);
-            return constructor.newInstance();
+            var params = getArgsForParams(constructor.getParameters());
+            return (T) constructor.newInstance(params);
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
         }
         return null;
     }
 
+    private Constructor<?> getConstructor(Class<?> clazz) {
+        final var constructors = clazz.getConstructors();
+        Constructor<?> result = null;
+
+        for (var constr : constructors) {
+            if (result == null) {
+                result = constr;
+            } else if (constr.getParameters().length > result.getParameters().length) {
+                result = constr;
+            }
+        }
+        return result;
+    }
+
     public <T> T nextObject(Class<T> clazz, String factoryMethod) {
         try {
-            Constructor<T> constructor = clazz.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            T instance = constructor.newInstance();
-
             Method method = null;
             if (factoryMethod != null && !factoryMethod.isEmpty()) {
                 method = getMostWideFactoryMethodOverload(clazz, factoryMethod);
                 method.setAccessible(true);
             }
-
-            Field[] fields = clazz.getDeclaredFields();
-            System.out.println(Arrays.toString(fields));
-            for (Field field : fields) {
-                field.setAccessible(true);
-                if (field.isAnnotationPresent(NotNullAnnot.class)) {
-                    field.set(instance, nextNotNullValue(field.getType()));
-                } else if (field.isAnnotationPresent(MinValue.class)) {
-                    long minValue = field.getAnnotation(MinValue.class).value();
-                    field.set(instance, nextValueWithinRange(field.getType(), minValue, Long.MAX_VALUE));
-                } else if (field.isAnnotationPresent(MaxValue.class)) {
-                    long maxValue = field.getAnnotation(MaxValue.class).value();
-                    field.set(instance, nextValueWithinRange(field.getType(), Long.MIN_VALUE, maxValue));
-                } else {
-                    field.set(instance, nextSimpleValue(field.getType()));
-                }
-            }
-            if (method != null) {
-                return (T) method.invoke(instance);
-            }
-            return instance;
+            var param = getArgsForParams(method.getParameters());
+            return (T) method.invoke(null, param);
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
         }
@@ -73,38 +61,21 @@ public class RandomObjectGenerator {
     }
 
     private Object nextSimpleValue(Class<?> type) {
+        Object result = null;
         if (type == int.class || type == Integer.class) {
-            return random.nextInt();
+            result = random.nextInt();
         } else if (type == long.class || type == Long.class) {
-            return random.nextLong();
+            result = random.nextLong();
         } else if (type == double.class || type == Double.class) {
-            return random.nextDouble();
+            result = random.nextDouble();
         } else if (type == float.class || type == Float.class) {
-            return random.nextFloat();
+            result = random.nextFloat();
         } else if (type == boolean.class || type == Boolean.class) {
-            return random.nextBoolean();
+            result = random.nextBoolean();
         } else if (type == String.class) {
-            return UUID.randomUUID().toString();
+            result = UUID.randomUUID().toString();
         }
-        return null;
-    }
-
-    private Object nextNotNullValue(Class<?> type) {
-        if (type == int.class || type == long.class || type == double.class ||
-            type == float.class || type == boolean.class) {
-            return nextSimpleValue(type);
-        } else if (type == Integer.class || type == Long.class || type == Double.class ||
-            type == Float.class || type == Boolean.class || type == String.class) {
-            return nextSimpleValue(type);
-        }
-        return null;
-    }
-
-    private Object nextValueWithinRange(Class<?> type, long minValue, long maxValue) {
-        if (type == int.class || type == Integer.class) {
-            return random.nextLong(maxValue - minValue + 1) + minValue;
-        }
-        return null;
+        return result;
     }
 
     @Nullable private static <T> Method getMostWideFactoryMethodOverload(Class<T> clazz, String factoryMethodName) {
@@ -119,5 +90,14 @@ public class RandomObjectGenerator {
             }
         }
         return factoryMethod;
+    }
+
+    @NotNull private Object[] getArgsForParams(Parameter[] parameters) {
+        Object[] args = new Object[parameters.length];
+
+        for (int i = 0; i < parameters.length; i++) {
+            args[i] = nextSimpleValue(parameters[i].getType());
+        }
+        return args;
     }
 }

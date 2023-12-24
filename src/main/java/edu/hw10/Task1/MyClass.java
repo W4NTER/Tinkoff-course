@@ -8,6 +8,10 @@ public class MyClass {
         return age;
     }
 
+    public String getName() {
+        return name;
+    }
+
     private MyClass(String name, int age) {
         this.name = name;
         this.age = age;
