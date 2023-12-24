@@ -96,7 +96,8 @@ public class RandomObjectGenerator {
         Object[] args = new Object[parameters.length];
 
         for (int i = 0; i < parameters.length; i++) {
-            args[i] = nextSimpleValue(parameters[i].getType());
+            NewValueWithinRange newValueWithinRange = null;
+            args[i] = newValueWithinRange.value(parameters[i], random);
         }
         return args;
     }
