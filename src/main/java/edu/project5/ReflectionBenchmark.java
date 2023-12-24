@@ -52,7 +52,7 @@ public class ReflectionBenchmark {
     private Function<Object, Object> function;
 
     private static Function createGetter(final MethodHandles.Lookup lookup,
-        final MethodHandle getter) throws Exception{
+        final MethodHandle getter) throws Exception {
         final CallSite site = LambdaMetafactory.metafactory(lookup, "apply",
             MethodType.methodType(Function.class),
             MethodType.methodType(Object.class, Object.class), //signature of method Function.apply after type erasure
